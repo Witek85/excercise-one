@@ -17,8 +17,8 @@ class ReposList extends Component {
         console.log('componentDidUpdate', this.props);
     }
     render() {
-        console.log(this.props.fetchedRepos)
-        const repos = this.props.fetchedRepos.map(repo => {
+        console.log(this.props.filteredRepos)
+        const repos = this.props.filteredRepos.map(repo => {
             console.log('repo', repo);
             return <Repo repoData={repo} />;
         })
@@ -33,7 +33,7 @@ class ReposList extends Component {
 function mapStateToProps(state) {
     console.log('state', state)
     return {
-        fetchedRepos: state.github.fetchedRepos
+        filteredRepos: state.github.filteredRepos
         // issDataError: state.iss.issDataError,
         // googleData: state.iss.googleData
     }
