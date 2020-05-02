@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { githubInit } from '../../actions/github';
+import { githubInit } from '../../store/actions/github';
 import Repo from '../repo/repo'
 
 class ReposList extends Component {

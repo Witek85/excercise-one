@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { filterRepos } from '../../actions/github';
+import { filterRepos } from '../../store/actions/github';
 
 class ReposForm extends Component {
   constructor(props) {
