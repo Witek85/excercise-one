@@ -1,14 +1,14 @@
 const initialState = {
-    fetchedRepos: {},
+    fetchedRepos: [],
   }
   
   const github = (state = initialState, action) => {
     switch (action.type) {
         case 'GITHUB_FETCH_SUCCESS':
-        console.log(action);
+        console.log('GITHUB_FETCH_SUCCESS', action);
         return {
             ...state,
-            githubData: 'SUCCESS'
+            fetchedRepos: action.payload
         };
         case 'GITHUB_FETCH_FAILED':
         console.log(action);

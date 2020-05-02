@@ -6,12 +6,12 @@ import axios from 'axios';
 function* fetchGithub(action) {
   console.log('fetchGithub', action)
   try {
-    const response = yield axios.get('https://api.github.com/users/Witek85/repos');
+    const response = yield axios.get('https://api.github.com/users/Appnroll/repos');
     yield console.log('axios', response.data);
-    yield put({type: GITHUB_FETCH_SUCCESS, payload: 'TODO'});
+    yield put({type: GITHUB_FETCH_SUCCESS, payload: response.data});
   } catch (e) {
     yield console.log('e', e)
-    yield put({type: GITHUB_FETCH_FAILED, message: 'ERROR'});
+    yield put({type: GITHUB_FETCH_FAILED, message: e});
   } 
 }
 
