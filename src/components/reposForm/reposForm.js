@@ -43,7 +43,7 @@ class ReposForm extends Component {
 
 function mapStateToProps(state) {
   return {
-      languages: state.github.languages
+      languages: state.github ? state.github.languages : []
   }
 }
 

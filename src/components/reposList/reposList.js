@@ -30,8 +30,8 @@ class ReposList extends Component {
 
 function mapStateToProps(state) {
     return {
-        filteredRepos: state.github.filteredRepos,
-        favouriteRepos: state.github.favouriteRepos
+        filteredRepos: state.github ? state.github.filteredRepos : [],
+        favouriteRepos: state.github ? state.github.favouriteRepos : []
     }
   }
   
