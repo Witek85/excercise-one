@@ -5,16 +5,29 @@ import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 
 const mockStore = configureMockStore();
-const store = mockStore({});
 
 describe('<ReposList />', () => {
+	let wrapper, store;
 
-  it('should render correctly', () => {
-		const wrapper = shallow(
-			<Provider store={store}>
-				<ReposList />
-			</Provider>
-		);
+	beforeEach(() => {
+		const initialState = {
+			filteredRepos: [{id: 1}, {id: 2}, {id: 3}],
+			favouriteRepos: []
+		};
+		store = mockStore(initialState);
+		wrapper = shallow(<ReposList store={store} />);
+	});
+
+	beforeEach(() => {
+		const initialState = {
+			filteredRepos: [{id: 1}, {id: 2}, {id: 3}],
+			favouriteRepos: []
+		};
+		store = mockStore(initialState);
+		wrapper = shallow(<ReposList store={store} />);
+	});
+
+	it('should render correctly', () => {
 		expect(wrapper).toMatchSnapshot();
-  });
+	});
 });

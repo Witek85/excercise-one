@@ -4,7 +4,8 @@ const initialState = {
     fetchedRepos: [],
     filteredRepos: [],
     favouriteRepos: [],
-    languages: []
+    languages: [],
+    githubDataError: ""
   }
   
   const github = (state = initialState, action) => {
