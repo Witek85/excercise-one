@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { githubInit, initFavourites } from '../../store/actions/github';
-import Repo from '../repo/repo'
+import Repo from '../repo/repo';
+import { Row } from 'react-styled-flexboxgrid';
 
 class ReposList extends Component {
     constructor(props) {
@@ -21,9 +22,9 @@ class ReposList extends Component {
             />;
         })
         return (
-            <div>
+            <Row>
                 {repos}     
-            </div>
+            </Row>
         )
     }
 }
