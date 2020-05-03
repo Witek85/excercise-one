@@ -29,7 +29,6 @@ class ReposList extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log('state', state)
     return {
         filteredRepos: state.github.filteredRepos,
         favouriteRepos: state.github.favouriteRepos

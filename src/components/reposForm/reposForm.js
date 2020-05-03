@@ -32,10 +32,7 @@ class ReposForm extends Component {
         <label>
           <select id="language" value={this.state.language} onChange={this.handleChange}>
             <option value="">All</option>
-            <option value="css">CSS</option>
-            <option value="html">HTML</option>
-            <option value="javascript">Javascript</option>
-            <option value="ruby">Ruby</option>
+            {this.props.languages.map((language, index) => <option key={index} value={language.key}>{language.value}</option>)}
           </select>
         </label>
         <button type="button" onClick={this.handleClear}>Clear</button>
@@ -46,7 +43,7 @@ class ReposForm extends Component {
 
 function mapStateToProps(state) {
   return {
-      // fetchedRepos: state.github.fetchedRepos
+      languages: state.github.languages
   }
 }
 

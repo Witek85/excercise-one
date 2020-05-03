@@ -10,18 +10,15 @@ const initialState = {
   const github = (state = initialState, action) => {
     switch (action.type) {
         case GITHUB_FETCH_SUCCESS:
-        console.log('GITHUB_FETCH_SUCCESS', action);
         return {
             ...state,
             fetchedRepos: action.payload,
             filteredRepos: action.payload,
-            languages: []
-            // action.payload.reduce((acc, val) => {
-            //   console.log(acc)
-            //   acc.push(val.language)
-            //   return acc;
-            // }, [])
-            // https://stackoverflow.com/questions/15125920/how-to-get-distinct-values-from-an-array-of-objects-in-javascript
+            languages: action.payload.reduce((acc, val) => {
+              const languagesList = acc.map(lang => lang.value);
+              !languagesList.includes(val.language) && acc.push({key: val.language.replace(/\s+/g, '-').toLowerCase(), value: val.language})
+              return acc;
+            }, [])
         };
         case GITHUB_FETCH_FAILED:
           return {
