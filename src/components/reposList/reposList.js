@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { githubInit } from '../../store/actions/github';
+import { githubInit, initFavourites } from '../../store/actions/github';
 import Repo from '../repo/repo'
 
 class ReposList extends Component {
@@ -10,17 +10,15 @@ class ReposList extends Component {
     }
     componentDidMount() {
         this.props.onGithubInit();
-        console.log('componentDidMount', this.props);
-        console.log('githubData', this.props);
-    }
-    componentDidUpdate() {
-        console.log('componentDidUpdate', this.props);
+        this.props.onInitFavourites();
     }
     render() {
-        console.log(this.props.filteredRepos)
         const repos = this.props.filteredRepos.map(repo => {
-            console.log('repo', repo);
-            return <Repo repoData={repo} />;
+            return <Repo 
+                key={repo.id}
+                repoData={repo} 
+                isFavourite={this.props.favouriteRepos.map(repo => repo.id).includes(repo.id)} 
+            />;
         })
         return (
             <div>
@@ -33,15 +31,15 @@ class ReposList extends Component {
 function mapStateToProps(state) {
     console.log('state', state)
     return {
-        filteredRepos: state.github.filteredRepos
-        // issDataError: state.iss.issDataError,
-        // googleData: state.iss.googleData
+        filteredRepos: state.github.filteredRepos,
+        favouriteRepos: state.github.favouriteRepos
     }
   }
   
 function mapDispatchToProps(dispatch) {
     return {
         onGithubInit: () => dispatch(githubInit()),
+        onInitFavourites: () => dispatch(initFavourites()),
     }
 }
   

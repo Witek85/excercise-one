@@ -26,10 +26,10 @@ class ReposForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label for="searchQuery">
+        <label>
           <input id="searchQuery" type="text" value={this.state.searchQuery} onChange={this.handleChange} />
         </label>
-        <label for="language">
+        <label>
           <select id="language" value={this.state.language} onChange={this.handleChange}>
             <option value="">All</option>
             <option value="css">CSS</option>

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { addToFavourites, removeFromFavourites } from '../../store/actions/github';
 
-const repo = props => {
+const Repo = props => {
   const {
     id, 
     name, 
@@ -12,6 +14,26 @@ const repo = props => {
     stargazers_count,
     watchers_count
   } = props.repoData;
+  const [isFavourite, setFavourite] = useState(props.isFavourite);
+
+  const onButtonClick = () => {
+    const {
+      onRemoveFromFavourites,
+      onAddToFavourites
+    } = props;
+    if (isFavourite) {
+      const filtered = props.favouriteRepos.filter((repo) => repo.id !== id);
+      localStorage.setItem('favouriteRepos', JSON.stringify(filtered));
+      onRemoveFromFavourites(id);
+    } else {
+      const favouriteReposCopy = [...props.favouriteRepos];
+      favouriteReposCopy.push({id})
+      localStorage.setItem('favouriteRepos', JSON.stringify(favouriteReposCopy));
+      onAddToFavourites({id});
+    };
+    setFavourite(!isFavourite);
+  }
+
   return (
     <div key={id}>
       <p>{name}</p>
@@ -21,9 +43,23 @@ const repo = props => {
       <span>stars - {stargazers_count}</span>  
       <span>watchers - {watchers_count}</span>  
       <span>forks - {forks_count}</span>
+      <button onClick={onButtonClick}>{isFavourite ? '-' : '+'}</button>
       <hr/>
     </div>
   )
 }
 
-export default repo;
+function mapStateToProps(state) {
+  return {
+      favouriteRepos: state.github.favouriteRepos
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+      onAddToFavourites: (repo) => dispatch(addToFavourites([repo])),
+      onRemoveFromFavourites: (id) => dispatch(removeFromFavourites(id)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Repo);
