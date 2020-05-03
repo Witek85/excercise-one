@@ -1,13 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
-import {configure, shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import createSagaMiddleware from 'redux-saga';
 import configureMockStore from 'redux-mock-store';
 import App from './App';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
 
 const sagaMiddleware = createSagaMiddleware();
 const mockStore = configureMockStore([sagaMiddleware]);
