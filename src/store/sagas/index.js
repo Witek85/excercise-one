@@ -4,10 +4,8 @@ import { GITHUB_FETCH_INIT, GITHUB_FETCH_SUCCESS, GITHUB_FETCH_FAILED, INIT_FAVO
 import axios from 'axios';
 
 function* fetchGithub(action) {
-  console.log('fetchGithub', action)
   try {
     const response = yield axios.get('https://api.github.com/users/Appnroll/repos');
-    yield console.log('axios', response.data);
     yield put({type: GITHUB_FETCH_SUCCESS, payload: response.data});
   } catch (err) {
     yield put({type: GITHUB_FETCH_FAILED, message: err});
